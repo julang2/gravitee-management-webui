@@ -17,9 +17,11 @@ import _ = require('lodash');
 import ApiService from '../../../../../services/api.service';
 import NotificationService from '../../../../../services/notification.service';
 import {StateService} from '@uirouter/core';
+import { Console } from 'console';
 
 class ApiEditPlanController {
 
+  pages: any[];
   plan: any;
   groups: any[];
   api: any;
@@ -104,6 +106,7 @@ class ApiEditPlanController {
         this.groups = [];
       }
     }
+
   }
 
   moveToNextStep(step: any) {
@@ -163,6 +166,10 @@ class ApiEditPlanController {
 
   isTagDisabled(tag: any): boolean {
     return !_.includes(this.userTags, tag.id) || !_.includes(this.api.tags, tag.id);
+  }
+
+  shouldNotEditConditions() : boolean {
+    return (this.plan.status === "published" || this.plan.status === "deprecated");
   }
 }
 

@@ -265,7 +265,7 @@ const ApiSubscriptionComponent: ng.IComponentOptions = {
         template: require('./subscription.transfer.dialog.html'),
         clickOutsideToClose: true,
         locals: {
-          plans: this.plans
+          plans: this.plans.filter(p => p.general_conditions == undefined || p.general_conditions === '')
         }
       }).then(plan => {
         this.subscription.plan = plan;
